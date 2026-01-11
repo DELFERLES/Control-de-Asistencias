@@ -1,0 +1,459 @@
+:root {
+    --color-primary: #4dd0e1; /* Soft teal */
+    --color-secondary: #ffc48c; /* Warm peach */
+    --color-background: #fff9f4; /* Warm, soft background */
+    --color-surface: #ffffff;
+    --color-text: #212121;
+    --color-text-light: #616161;
+    --color-present: #4caf50; /* Stronger Green */
+    --color-absent: #e53935; /* Stronger Red */
+    --color-late: #ffb300; /* Amber/Orange */
+    --color-pastel-blue: #f5f5dc;   /* Soft beige pastel */
+    --color-pastel-green: #d8f5dc;  /* Softer pastel */
+    --color-pastel-yellow: #fff1c9; /* Softer pastel */
+    --color-pastel-pink: #e0d7ff;   /* Soft lilac */
+    --padding-unit: 16px;
+    --border-radius: 10px; 
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body, html {
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-background);
+}
+
+#app-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Header */
+header {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    padding: var(--padding-unit);
+    /* Soft shadow for depth */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Main Content Area */
+.main-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: var(--padding-unit);
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-unit);
+}
+
+/* Buttons and Controls */
+button {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s;
+    min-height: 44px; /* Touch friendly */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:hover, button:focus {
+    background-color: #ff6363; /* Slightly darker primary */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+button.secondary {
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    padding: 10px 16px;
+}
+
+button.secondary:hover {
+    background-color: #ffe4e4;
+}
+
+.fab {
+    position: fixed;
+    bottom: var(--padding-unit);
+    right: var(--padding-unit);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-size: 1.6rem;
+    line-height: 48px;
+    text-align: center;
+    background-color: var(--color-primary); /* Ensure FAB uses primary color */
+    color: white;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    z-index: 20;
+    padding: 0;
+    min-height: 48px;
+}
+
+.fab:hover {
+    background-color: #ff6363;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Cards/List Items */
+.card {
+    background-color: var(--color-surface);
+    border-radius: var(--border-radius);
+    padding: var(--padding-unit);
+    /* More pronounced, but diffused shadow */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08); 
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card:active {
+    transform: scale(0.98);
+}
+
+.section-card h2 {
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+}
+
+.section-card p {
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+}
+
+/* Subcuadros de porcentaje de asistencia/inasistencia */
+.attendance-summary {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.attendance-box {
+    flex: 1;
+    padding: 6px 8px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #ffffff;
+}
+
+.attendance-box-present {
+    background-color: var(--color-present);
+}
+
+.attendance-box-absent {
+    background-color: var(--color-absent);
+}
+
+/* Statistics Card - Uses card style but removes hover effects */
+.stats-card {
+    cursor: default;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Slightly less shadow than interactive cards */
+}
+.stats-card:active {
+    transform: none;
+}
+.stats-card:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Pastel Color Overrides for Cards/Sections */
+.pastel-1 { background-color: var(--color-pastel-blue); }
+.pastel-2 { background-color: var(--color-pastel-green); }
+.pastel-3 { background-color: var(--color-pastel-yellow); }
+.pastel-4 { background-color: var(--color-pastel-pink); }
+
+/* Subject cards: soft, varied colors */
+.subject-card {
+    color: var(--color-text);
+}
+
+.subject-color-1 {
+    background: #e0f7fa; /* soft aqua */
+}
+
+.subject-color-2 {
+    background: #fff3bf; /* light pastel yellow */
+}
+
+.subject-color-3 {
+    background: #d3f9d8; /* mint green */
+}
+
+.subject-color-4 {
+    background: #f5f5dc; /* soft beige */
+}
+
+.subject-color-5 {
+    background: #e5d9f2; /* soft lavender */
+}
+
+.subject-color-6 {
+    background: #ffe3c0; /* warm apricot */
+}
+
+/* Form Styling */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal {
+    background: var(--color-surface);
+    padding: 24px;
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transform: scale(0.95);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Added subtle bounce effect */
+}
+
+.modal-overlay.active .modal {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+input[type="text"], textarea, input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ffd4c9;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit; /* Ensure textarea uses the same font */
+    background-color: #fffdf8;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Student List */
+.student-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.student-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--color-surface);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.student-item .name-container {
+    flex-grow: 1;
+}
+
+.student-item button {
+    padding: 8px;
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    min-height: 44px;
+}
+
+/* Attendance Grid/Map Styling */
+.attendance-grid {
+    overflow-x: auto;
+    width: 100%;
+    padding-bottom: 10px; /* Space for horizontal scrollbar */
+}
+
+.attendance-table {
+    min-width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap; /* Keep columns from wrapping */
+}
+
+.attendance-table th, .attendance-table td {
+    padding: 4px;
+    border: 1px solid #ffe1d5;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.attendance-table thead th {
+    background-color: var(--color-primary);
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    border-color: var(--color-primary);
+}
+
+.attendance-table tbody th {
+    text-align: left;
+    background-color: var(--color-surface);
+    position: sticky;
+    left: 0;
+    z-index: 4;
+    font-weight: normal;
+    line-height: 1.1;
+}
+
+/* Ensure name cells don't shrink too much */
+.attendance-table tbody th {
+    min-width: 100px;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.attendance-table .date-header {
+    width: 40px;
+    min-width: 40px;
+    max-width: 40px;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    padding: 4px 0;
+    cursor: default;
+    user-select: none;
+}
+
+.attendance-cell {
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    transition: background-color 0.1s;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    border-radius: 4px;
+    font-size: 1.1rem;
+}
+
+/* Default status (Today/Future) - solid color backgrounds */
+.status-P {
+    background-color: var(--color-present); /* Green */
+}
+
+.status-A {
+    background-color: var(--color-absent); /* Red */
+}
+
+.status-L {
+    background-color: var(--color-late); /* Orange */
+}
+
+.status-U { /* Unmarked (Default neutral background) */
+    background-color: #ffd4c9;
+    color: var(--color-text);
+    font-weight: normal;
+}
+
+/* Past day specific styling: Neutral background, color the icon/text */
+.attendance-cell.past-day {
+    background-color: var(--color-surface); /* White background */
+    border: 1px solid #ffe1d5;
+    font-size: 1.4rem; /* Make check/X slightly smaller than before */
+}
+
+.attendance-cell.past-day.status-P {
+    color: var(--color-present); /* Green checkmark */
+    background-color: var(--color-background); /* Slightly off-white */
+}
+
+.attendance-cell.past-day.status-A {
+    color: var(--color-absent); /* Red X */
+    background-color: var(--color-background);
+}
+
+.attendance-cell.past-day.status-L {
+    color: var(--color-late); /* Orange T */
+    background-color: var(--color-background);
+    font-size: 1rem; /* Keep T smaller */
+}
+
+.attendance-cell.past-day.status-U {
+    background-color: var(--color-surface);
+    color: var(--color-text-light); /* Faint gray for unmarked past days */
+}
+
+/* Statistics Table */
+.stats-table {
+    border-collapse: collapse;
+}
+
+.stats-table th, .stats-table td {
+    padding: 6px 0;
+    border-bottom: 1px solid #ffe1d5;
+}
+
+.stats-table th:first-child, .stats-table td:first-child {
+    padding-left: 0;
+}
+
+.stats-table th:last-child, .stats-table td:last-child {
+    padding-right: 0;
+}
